@@ -6,14 +6,14 @@ Orchestrations describe workflows that coordinate multiple Skills, supporting to
 
 An Orchestration record should make change impact visible by documenting:
 
-- participating Skills and compatible versions;
+- participating Skills and relevant compatibility conditions;
 - sequence, routing, and handoff conditions;
 - shared data and outputs;
 - human approval boundaries;
 - failure and fallback behavior;
-- scenarios required when a dependency changes.
+- linked Test Plan cases required to confirm the coordinated behavior.
 
-Do not copy Skill source into an Orchestration. Link to registered Skills and state version constraints explicitly.
+Do not copy Skill source into an Orchestration. Link to the participating project Skills and governing Specifications.
 
 ## Creation threshold
 
@@ -24,6 +24,6 @@ Create or update a project Orchestration when an authorized project slice includ
 - routing or conditional behavior; or
 - a shared approval, failure, or recovery boundary.
 
-Do not create an Orchestration merely because subjects share dependencies, belong to the same project, or might interact later. Start with the smallest real coordination seam and expand the definition only as accepted scope and evidence make additional workflow behavior necessary.
+Do not create an Orchestration merely because subjects share dependencies, belong to the same project, or might interact later. Start with the smallest real coordination boundary and expand the definition only as accepted scope and evidence make additional workflow behavior necessary.
 
 Creating a draft records an already-authorized workflow slice. It does not authorize Skill implementation, packaging, connected access, execution, deployment, or release.

@@ -1,43 +1,48 @@
 ---
-name: replace-with-skill-name
-description: Replace with a concise description of when this skill should be used.
+name: skill-name
+description: "Describe the outcome this Skill owns and the user situations that should invoke it. Use when the user names that outcome or asks for the supported experience."
 ---
 
-# Skill title
+# Skill Name
 
-> Template: replace all instructional placeholders before testing.
+## Owned outcome
 
-## Purpose
+[State the coherent result this Skill helps the user achieve.]
 
-Describe the outcome this skill produces.
+## Invocation and starting context
 
-## Use when
+- Recognize [natural user situations that should invoke the Skill].
+- Inspect only the minimum relevant context already available before asking the user to repeat information.
+- Ask only when the answer materially changes the experience, authority, privacy, safety, or ability to proceed.
 
-- Describe explicit trigger phrases or task types.
+## Experience
 
-## Do not use when
+1. [Interpret the user's goal and offer a useful starting point.]
+2. [Perform or guide the central behavior.]
+3. [Let the user correct, redirect, pause, or stop.]
+4. [Report the result, partial result, limitation, or next user-owned action accurately.]
 
-- Describe important exclusions and adjacent tasks.
+## Required Skill host capabilities
 
-## Required inputs
+- [Tool, context, file, connector, or interaction capability the experience depends on.]
+- If a required capability is unavailable or unverified, state the limitation and use the specified fallback rather than claiming success.
 
-- List required files, values, access, or context.
+## Knowledge and references
 
-## Workflow
+- Keep runtime references required by this Skill under `references/` and link them with relative paths.
+- Do not depend on Dexter-root files or project governance documents at runtime unless they are intentionally included in the package.
 
-1. Describe the first deterministic step.
-2. Describe validation and decision points.
-3. Describe the final deliverable or handoff.
+## Authority, privacy, and safety
 
-## Guardrails
+- [Actions the user must specifically authorize.]
+- [Information that must not be accessed, retained, or disclosed.]
+- [Destructive, external, or difficult-to-reverse effects that require a stop or confirmation.]
 
-- State privacy, safety, approval, and data-handling constraints.
-- State actions the user must perform themselves.
+## Partial, blocked, and failure behavior
 
-## Validation
+- Distinguish completed effects from drafts, proposals, attempted actions, and unverified claims.
+- Preserve useful work when continuation is blocked, and identify what remains incomplete.
 
-- Define checks that demonstrate successful completion.
+## Package boundary
 
-## Output
-
-Describe the expected artifact, response, or state.
+Package root `SKILL.md` and only the runtime files the Skill host requires, normally under `references/`. Share the package alongside its governing Specifications and reusable Test Plans; do not place project governance inside the runtime package unless the host experience requires it.

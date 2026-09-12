@@ -1,29 +1,12 @@
 # Dexter documentation
 
-This area contains reusable project-lifecycle methodology, source-of-truth templates, laboratory inventory, plans, scenarios, evidence, confidence assessments, findings, and decisions.
+Dexter uses the same living product-document chain it requires of laboratory projects:
 
-## Source-of-truth lifecycle
+1. [`CHARTER.md`](CHARTER.md) governs Dexter's purpose, outcomes, scope, and authority.
+2. [`PRD.md`](PRD.md) defines prioritized outcomes, product requirements, acceptance signals, constraints, and dependencies.
+3. [`specifications/`](specifications/) defines Dexter behavior and contracts in separate Markdown files.
+4. [`test-plans/`](test-plans/) provides linked, reusable confirmation patterns and preserves dated observations.
 
-Dexter projects maintain a connected chain:
+Use the files in [`_templates/`](_templates/) when starting a project and follow the canonical layout in [`projects/README.md`](../projects/README.md). Product direction belongs in the Charter or PRD, intended behavior in Specifications, and test definitions and observations in Test Plans.
 
-> Project Charter → PRD → recorded MVP scope → Specifications → Test Plan → Test Results → Confidence Assessment
-
-Charters, PRDs, MVP scopes, specifications, and test plans are living statements of current intent. Completed test results are immutable observations. Dated confidence assessments state only what linked evidence supports for an exact scope.
-
-- [`methodology/`](methodology/): reusable lifecycle, living-document, impact, testing, and human-centered guidance.
-- [`inventory/living-project-status.md`](inventory/living-project-status.md): Dexter-wide index of project source-of-truth registers.
-- [`_templates/`](./_templates/): starting points for upstream sources of truth and downstream laboratory records.
-
-## Record types
-
-- `inventory/`: Skill and Orchestration ownership, versions, dependencies, and status.
-- `test-plans/`: coordinated test scope across skills or releases.
-- `scenarios/`: stable, reusable test cases with expected behavior.
-- `experiments/`: hypotheses, variables, direct observations, and interpretations.
-- `test-results/`: immutable records of individual executions.
-- `confidence/`: dated, evidence-based readiness assessments for an exact version and scope.
-- `findings/`: patterns, defects, risks, and improvement opportunities spanning runs.
-- `decisions/`: accepted choices and rationale.
-- `_templates/`: starting points for Charters, PRDs, MVP scopes, specifications, implementation plans, traceability, impact assessments, and laboratory records.
-
-Use relative links to connect each accepted claim to its source, specification, scenario, tested artifact, result, confidence, finding, and decision. Do not revise an old result or assessment to match later behavior; revise living intent and add new dated evidence or reassessment records.
+Dexter's prior documentation model is preserved unchanged under [`archive/dexter-docs-legacy-2026-09-09/`](../archive/dexter-docs-legacy-2026-09-09/) for specific historical questions. It is not current guidance.

@@ -1,126 +1,60 @@
 ---
 name: compass-curator
-description: 'Review accepted Compass graph state for relevance, organization, recorded recency, and lifecycle attention. Offer user-controlled recommendations and route archival or organization to Tracking Topic Interview without modifying the graph.'
+description: "Review Compass Efforts for completion or 14-day customer-work inactivity, archive only authorized Efforts, preserve and verify Activity metadata, and separately remove only approved stale Activity files."
 ---
 
 # Compass Curator
 
-## Version and mode
+## Version and outcome
 
-- Version: `0.2.0-dogfood-candidate`
-- Contracts: Shared Contracts and Graph Schema `0.3-beta-baseline`
-- Orchestration: `compass-work-memory-lifecycle` `0.2.0-dogfood-candidate`
-- Mode: bounded read-only review and recommendation
-- External changes: always `0`
+- Version: `0.1.0-local-candidate`
+- Mode: local candidate; required Copilot Cowork capabilities are unverified
 
-Read [the behavior contract](./references/behavior-contract.md) before reviewing graph content.
+Keep the filing cabinet useful through safe lifecycle review. Review is read-only. Effort archival and exact Activity-file removal are separate decisions, with preservation and verification between them.
 
-## Owned outcome
+Read [the lifecycle contract](references/lifecycle-contract.md) before proposing candidates or effects.
 
-Help the user decide whether retained work memory remains useful, understandable, organized, and worthy of attention. Produce a bounded report containing:
+## Start and criteria
 
-- directly observed accepted graph state;
-- interpretations clearly labeled as interpretations;
-- a short prioritized set of recommendations;
-- the user's disposition for each reviewed recommendation; and
-- minimized handoffs only for recommendations the user chooses to explore.
+- Start when the user asks to curate, archive completed work, review stale Efforts, or compact archived Activity detail.
+- Ask for the explicit Compass graph root and inspect only that graph.
+- Propose the default threshold of 14 days without meaningful customer Activity, the configured timezone cutoff, included Efforts, and evidence coverage.
+- Offer `Approve review`, `Change criteria`, and `Cancel`. Criteria approval authorizes review only.
 
-Curator never converts a recommendation into a graph change.
+## Review
 
-## Scope gate
+For each in-scope active Effort:
 
-Require one explicit user-selected review scope, such as:
+1. Derive last Activity as the greatest reliable `lastActivityAt` among live Activities and retained archived Activity metadata.
+2. Exclude file, retrieval, graph-edit, Daily Log, relationship, attention-state, and unrelated-message times.
+3. Treat incomplete Email or Teams continuation, unavailable item timestamps, ambiguous timezone, future dates, uncertain Activity alignment, or unknown timestamp derivation as uncertainty rather than staleness.
+4. Present completed, stale, current, and uncertain Efforts with basis, affected Activities, proposed retained metadata, possible later removals, and no mutation.
 
-- named Tracking Topics;
-- Conversations in the Parking Lot projection;
-- one CSP and its derived Topics;
-- one local-date range of Daily Log navigation; or
-- a bounded question about relevance or organization.
+## Archive decision
 
-Record what is included, excluded, unreadable, and unavailable. Do not call a partial scope a whole-graph review. Do not search for another graph or follow paths outside the supplied root.
+Ask the user to authorize exact Efforts. For each authorized Effort:
 
-Use only accepted graph state. Do not access Email, Teams, Microsoft 365, Work IQ, OneDrive, web, raw source evidence, or provisional proposals from another Skill.
+- set `status: archived` and require explicit boolean `success`;
+- preserve required metadata for each Activity proposed for later compaction;
+- obtain Governor preflight validation;
+- re-read, update, append Daily Log effects, and read back;
+- obtain Governor postflight validation; and
+- leave every Activity file present.
 
-## Review method
+Declined and unresolved Efforts remain unchanged. An archive failure leaves related Activity files intact.
 
-1. Read the selected objects and canonical relationships.
-2. Derive reverse views only from owner fields: Conversations by `trackingTopicId`, Topics by `cspId`, and Parking Lot from absent `trackingTopicId`.
-3. Preserve unknown frontmatter and user-authored content as authoritative input, not defects.
-4. Separate each direct observation from interpretation.
-5. Prepare only recommendations supported by the inspected scope.
-6. Present no more than three high-priority recommendations at once.
+## Separate Activity removal
 
-Derive latest recorded graph activity only from accepted Daily Log entries linked to the reviewed object. Label it `latest recorded Compass activity`, never source-system last activity. Missing recent entries may support a review question but not a stale or complete conclusion. Do not infer employee performance, intent, customer health, sensitive traits, neglect, or causality.
+Only after archive metadata is verified, present the exact Activity files, retained entries, and graph-reference effects. Offer `Remove listed files`, `Change list`, `Keep all`, and `Cancel`.
 
-## Recommendation types
+Removal approval applies only to the displayed files. Re-read the archived Effort and Activity immediately before each removal. Stop on conflict, changed metadata, active references, or failed validation. Remove only approved files, append one Daily Log effect per removal, and validate the resulting graph.
 
-Curator may recommend user review of:
+Never remove an Effort or source Email or Teams content.
 
-- unclear or overlapping Topic wording;
-- Conversations that may benefit from Topic organization;
-- possible Topic consolidation;
-- possible Topic archival or reactivation;
-- possible Conversation deletion review;
-- missing attention identified through explicit user criteria; or
-- structural concerns that warrant Graph Governor inspection.
+## Report
 
-Recommendations are not authority. Staleness alone never changes or deletes an object. Tracking Topics are never deleted.
+Report exact completed, declined, blocked, partial, cancelled, and uncertain outcomes: Efforts reviewed and archived, metadata retained and verified, Activity files removed or preserved, Daily Log effects, coverage limitations, and unresolved conflicts. Never claim lifecycle completion from attempted effects.
 
-## Interaction
+## Package boundary
 
-Curator should feel like a thoughtful review, not scoring or surveillance. Start from the user's purpose and use their language.
-
-Use action-specific typed paths. For lifecycle review offer `Review for archival`, `Keep active`, and `Defer`. For organization offer `Review organization`, `Keep as is`, and `Defer`. For health assurance offer `Run read-only scan`, `Skip`, and `Cancel review`.
-
-Answer questions briefly and show source object labels and concise rationale without dumping graph bodies. Accept `Pause` and `Cancel`. Dismissing a recommendation changes no authoritative graph state and creates no Daily Log activity.
-
-## Route selected recommendations
-
-### To Tracking Topic Interview
-
-For user-selected Topic meaning, merge, alignment, archival, or reactivation work, send only:
-
-- stable object IDs;
-- current user-facing labels;
-- canonical current relationships;
-- concise observed reason for review;
-- the user's request to explore; and
-- one correlation ID.
-
-The handoff carries no modification approval. Tracking Topic Interview must prepare a fresh exact proposal.
-
-For archival, also send the latest recorded Compass activity date when available and the user's explicit stale or completed assessment. Do not characterize the Topic as stale or completed on the user's behalf.
-
-### To Graph Governor
-
-For a structural concern, send a bounded read-only health question, affected paths or IDs, direct observation, and correlation ID. Do not classify the issue as valid, invalid, or repairable yourself.
-
-### To Daily Scan
-
-Do not invoke Daily Scan as an automatic remedy. The user may separately initiate a selected-day scan when missing recent evidence is the question.
-
-## Boundaries
-
-Do not:
-
-- create, modify, move, rename, archive, reactivate, merge, align, unalign, or delete graph objects;
-- modify configuration, relationships, Daily Logs, or user-authored content;
-- claim structural validation or independently prepare a write request;
-- claim authoritative source activity or automate staleness, completion, or archival;
-- treat recommendation dismissal as graph state;
-- retain or expose raw source evidence, secrets, or unrelated graph content;
-- access a graph beyond the supplied bounded review scope; or
-- claim complete health, runtime behavior, or external effects.
-
-## Failure and completion
-
-Use:
-
-- `completed` when the bounded review and selected handoffs finish;
-- `empty` when no supported recommendation is observed;
-- `partial` when a meaningful scope was reviewed but declared content was unavailable;
-- `cancelled` when the user stops;
-- `blocked` when no safe meaningful review can occur; or
-- `failed` for an unexpected review failure.
-
-Report inspected scope, exclusions, observations, interpretations, recommendation dispositions, handoffs prepared, limitations, and `External changes: 0`. Never describe an empty recommendation set as proof that the entire graph is healthy.
+The runtime candidate consists only of this `SKILL.md` and its file under `references/`. It has no external project-governance or legacy-artifact dependency.

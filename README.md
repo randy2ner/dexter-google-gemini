@@ -1,137 +1,73 @@
 # Project Dexter
 
-## Build Better AI Skills. Not Bigger Prompts.
+Dexter is a lightweight laboratory assistant for developing, testing, packaging, and evolving Copilot Skills and Orchestrations. It helps a user move quickly from a natural-language idea to a useful end-to-end experience on a Skill host such as Cowork or Scout.
 
-**A lightweight laboratory for developing, validating, and evolving AI Skills and Orchestrations.**
+## Project knowledge model
 
----
+Every project maintains a living chain:
 
-## You're Already Building Skills
+1. `CHARTER.md` preserves vision, purpose, users, outcomes, scope, boundaries, authority, and accepted versus provisional direction.
+2. `PRD.md` translates the Charter into prioritized outcomes, requirements, capabilities, acceptance signals, non-goals, constraints, and dependencies.
+3. `specifications/` defines coherent behaviors and contracts in separate Markdown files.
+4. `test-plans/` provides reusable prompts or situations, practical checks, observable confirmation criteria, host profiles, and dated observations.
 
-### The problem is that you are not tracking their evolution.
+Several Test Plans may verify one Specification, and one Test Plan may cover related behavior from several Specifications. Product direction stays in the Charter or PRD, intended behavior in Specifications, and test definitions and observations in Test Plans. Dexter does not require separate decision, finding, confidence, impact, status, scenario, or test-result records.
 
-AI solutions often grow through a familiar loop:
+The canonical project structure and sharing boundary are defined in [`projects/README.md`](projects/README.md). Starting templates are under [`docs/_templates/`](docs/_templates/), and the Skill source scaffold is under [`skills/_template/`](skills/_template/).
 
-```text
-Idea
-	↓
-Build a Skill
-	↓
-Fix one problem
-	↓
-Break something else
-	↓
-Add another Skill
-	↓
-Tune an Orchestration
-	↓
-Wonder which change caused the behavior
-	↓
-Start spinning plates faster
-```
+## Development lifecycle
 
-The history is trapped inside conversations. Dependencies are undocumented. Testing is informal. Confidence is subjective. When a Skill changes, nobody knows what else might break.
+### Discovery gate
 
-## Enter Dexter's Laboratory
+Dexter quickly brainstorms the outcome and intended experience with the user, establishes the Charter and PRD, specifies the behaviors the product must carry, and probes only the Skill host capabilities that must be understood before building.
 
-Project Dexter moves Skill development out of isolated prompting and into the durable framework of a GitHub repository. It is laboratory equipment for AI builders: folders, records, templates, and supporting tools for collecting Skills, testing ideas, documenting experiments, validating results, and understanding how changes affect an AI environment.
+Discovery is sufficient when accepted direction and testable behavior support the smallest coherent end-to-end candidate. Non-blocking uncertainty remains visible without extending the interview.
 
-Dexter is intentionally lightweight. Its structure can be customized, extended, or replaced as the team's practice evolves.
+### Build gate
 
-## Meet the Quadroplex-T3000 Computer
+Dexter builds the simplest Skill or coordinated set of Skills that can produce the experience. It creates linked Test Plans with repeatable situations and observable confirmations, packages the runtime source, and begins representative testing on the intended Skill host as early as authority and prerequisites allow.
 
-The **Quadroplex-T3000 Computer** is the operating model for the repository. It oversees the laboratory by:
+A reviewable package is not the end of development. The first host experience begins the Skill's experiential training.
 
-- tracking progress;
-- recording experiments;
-- measuring confidence from evidence;
-- monitoring dependencies;
-- documenting evolution;
-- validating Orchestrations;
-- preserving lessons learned;
-- preparing Skills and supporting documentation for redistribution; and
-- tracking release notes, version history, and packaging readiness.
+### Continuing training
 
-It does not replace Copilot Cowork. It provides the controlled workbench around Cowork.
-
-## What Can Dexter Do?
-
-Do not develop only where the work happens. Step outside the AI surface and put your Skills up on the lift.
-
-```text
-Quadroplex-T3000 Computer
-│
-├─ Observe
-├─ Test
-├─ Document
-├─ Validate
-├─ Package
-│
-└─ Your next Skills project
-	 ├─ Skill A
-	 ├─ Skill B
-	 ├─ Skill C
-	 └─ Skill D
-```
-
-Dexter creates traceability from an idea to a versioned Skill, from a scenario to an observed result, and from a finding to a decision. That traceability makes regression risk visible and confidence explainable.
+Representative use reveals what is useful, confusing, unnatural, missing, or host-dependent. Dexter records bounded observations, coordinates revisions across affected project artifacts and source, and tests again. This continues for as long as the project remains useful; behavior observed on one host or surface is not automatically established on another.
 
 ## Laboratory Layout
 
 | Location | Purpose |
 | --- | --- |
-| [`projects/`](projects/) | Isolated, self-contained laboratory projects such as Compass |
-| [`skills/`](skills/) | Reusable Skill source intentionally promoted beyond one project |
-| [`orchestrations/`](orchestrations/) | Reusable Orchestration patterns intentionally promoted beyond one project |
-| [`skill-exchange/`](skill-exchange/) | Shared exchange area; prefer each project's local exchange for project artifacts |
-| [`docs/inventory/`](docs/inventory/) | Skill and Orchestration registry |
-| [`docs/test-plans/`](docs/test-plans/) | Test scope, objectives, and acceptance criteria |
-| [`docs/scenarios/`](docs/scenarios/) | Reusable and reproducible experiment definitions |
-| [`docs/experiments/`](docs/experiments/) | Hypotheses, controlled changes, observations, and interpretations |
-| [`docs/test-results/`](docs/test-results/) | Immutable observations from individual runs |
-| [`docs/confidence/`](docs/confidence/) | Evidence-based readiness assessments |
-| [`docs/findings/`](docs/findings/) | Cross-run findings, regressions, and lessons learned |
-| [`docs/decisions/`](docs/decisions/) | Decisions and their rationale |
-| [`docs/_templates/`](docs/_templates/) | Copyable records for consistent laboratory work |
-
-## The Dexter Loop
-
-1. **Register** — identify the Skill or Orchestration, its owner, purpose, version, and dependencies.
-2. **Build** — develop source in the owning project's `skills/` or `orchestrations/` directory and document meaningful changes.
-3. **Design** — shape one repeatable, representative experience and its material boundaries.
-4. **Package** — place the exact importable artifact in the owning project's `skill-exchange/ready-for-test/` directory.
-5. **Test** — execute the experience in Copilot Cowork, directly or through a [mediated rehearsal](docs/methodology/mediated-cowork-experience-rehearsals.md), and record direct observations.
-6. **Assess** — compare expected and actual behavior; update confidence using linked evidence.
-7. **Learn** — preserve findings and decisions, including failed experiments.
-8. **Evolve** — create a new version and rerun affected scenarios rather than rewriting history.
+| [`projects/`](projects/) | Isolated projects and the canonical project-layout contract |
+| [`.github/skills/`](.github/skills/) | Dexter's on-demand Discovery, capability-probe, and mediated-testing workflows |
+| [`skills/_template/`](skills/_template/) | Minimal project Skill source scaffold |
+| [`orchestrations/`](orchestrations/) | Reusable Orchestration guidance and template |
+| [`skill-exchange/`](skill-exchange/) | Package exchange guidance for intentionally shared artifacts |
+| [`docs/`](docs/) | Dexter's own living product documents and project templates |
+| [`archive/`](archive/) | Non-authoritative records from prior Dexter models |
 
 ## Quick Start
 
-1. Create an isolated directory under [`projects/`](projects/) for the effort.
-2. Establish its vision and scope charter before defining requirements or implementation.
-3. Copy reusable templates from [`docs/_templates/`](docs/_templates/) into the project's documentation area.
-4. Develop Skill and Orchestration source inside the project boundary.
-5. Exchange, test, and retain exact artifacts inside the project's local exchange area.
-6. Promote material to Dexter's root-level collections only after intentionally generalizing it for reuse.
+1. Create an isolated directory under [`projects/`](projects/).
+2. Create its Charter, PRD, Specifications, and Test Plans from the templates.
+3. Develop and package the simplest end-to-end Skill or Orchestration candidate inside the project boundary.
+4. Begin the representative host experience, record observations in the relevant Test Plans, and make one coordinated revision.
+5. Inspect the project as a standalone directory and remove required dependencies on Dexter's root scaffolding.
 
 ## Core Principles
 
-- **Evidence over intuition.** Confidence must link to observed results.
-- **History over hindsight.** Preserve failed runs and superseded versions.
-- **Explicit dependencies.** A changed Skill should reveal which Orchestrations and scenarios may be affected.
-- **Source versus specimen.** Develop in `skills/`; test the exact packaged copy in `skill-exchange/`.
+- **Evidence over intuition.** Success must be bounded to observed results.
+- **History over hindsight.** Preserve prior dated Test Plan observations and exact tested specimens.
+- **Explicit dependencies.** A changed Skill should reveal which Specifications, Orchestrations, packages, and Test Plan cases may be affected.
+- **Source versus specimen.** Develop in the owning project's `skills/`; test the exact packaged copy in that project's `skill-exchange/`.
 - **Small and replaceable.** The framework should help the work without becoming the work.
 - **No fabricated outcomes.** Record only what was directly observed, then separate interpretation from evidence.
-- **Instructions meet a medium.** Evaluate Skill source together with the AI surface, host controls, conversation, and data context that shape its behavior.
+- **Experiential training.** Evaluate and improve Skill guidance through representative use on the intended Skill host throughout the project's useful life.
 
 ## Naming and Lifecycle
 
-- Use lowercase kebab-case for Skill, Orchestration, and scenario names.
-- Start dated records with `YYYY-MM-DD`.
-- Suggested artifact name: `<skill-name>-v<version>.SKILL`.
-- Suggested test result: `YYYY-MM-DD-<skill-name>-<scenario>-<environment>.md`.
-- Preserve any package layout or filename required by Copilot Cowork.
-- Within the owning project's exchange, move artifacts through `incoming` → `ready-for-test` → `tested` → `archive`.
+- Use lowercase kebab-case for Skill and Orchestration names.
+- Preserve package layouts and filenames required by Copilot Cowork.
+- Place importable `.skill` files directly in the owning project's flat `skill-exchange/` directory and identify tested packages by exact filename in the relevant Test Plan.
 
 ## Collaboration
 

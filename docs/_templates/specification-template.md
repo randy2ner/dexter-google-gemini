@@ -1,38 +1,43 @@
-# Specification: [subject]
+# [Project] Specification
 
 ## Document control
 
-- **Status:** [draft, proposed, accepted, living, superseded]
+- **Status:** [draft or active]
 - **Version:** [version]
 - **Owner:** [role or person]
 - **Created:** YYYY-MM-DD
 - **Last updated:** YYYY-MM-DD
-- **Governed by:** [Charter, PRD, and MVP links]
-- **Implementation authority:** [none or exact boundary]
+- **Charter:** [`../CHARTER.md`](../CHARTER.md)
+- **PRD requirements:** [IDs linked to `../PRD.md`]
+- **Implementation authority:** [none or exact boundary authorized by the user]
 
-## Purpose and owned outcome
+## Purpose and applicability
 
-[What this subject must accomplish.]
+[The coherent behavior or contract this Specification defines, the outcome it supports, and the Skills or Orchestrations to which it applies.]
 
-## Inputs, outputs, and interfaces
+## Scope and boundaries
 
-| Element | Contract |
-| --- | --- |
-| [Input/output/interface] | [Required shape and semantics] |
+- **In scope:** [scope]
+- **Out of scope:** [scope]
+- **Authority, privacy, and safety:** [boundaries]
 
 ## Required behavior
 
-| ID | Requirement | Source | Acceptance criterion |
+| ID | Behavior or contract | Observable expectation | Status |
 | --- | --- | --- | --- |
-| SPEC-001 | [Precise behavior] | [PRD requirement] | [Observable criterion] |
+| SPEC-001 | [What the product must do] | [What a user or tester can observe] | [proposed, accepted, or implemented] |
 
-## Human interaction
+## Skills and orchestration
 
-[Tone, comprehension, agency, dignity, trust, accessibility, and interruption expectations.]
+| Component | Responsibility | Inputs and outputs | Authority |
+| --- | --- | --- | --- |
+| [Skill or Orchestration] | [Owned behavior] | [Contract] | [Boundary] |
 
-## Authority, safety, and privacy boundaries
+## Interaction and information
 
-- [Boundary]
+| Element | Contract |
+| --- | --- |
+| [Conversation, workflow, interface, schema, or information] | [Required shape, sequence, semantics, and experience] |
 
 ## Constraints and dependencies
 
@@ -42,21 +47,26 @@
 
 - [Required honest outcome]
 
-## Edge cases and unresolved questions
+## Decisions and open questions
 
-- [Case or question]
+- **Accepted:** [Decision and reason]
+- **Open:** [Question and effect]
 
-## Traceability and evaluation
+## Implementation status
 
-- **Test plan:** [link or pending]
-- **Scenarios:** [links or pending]
+- **Implemented:** [current source/package state]
+- **Not implemented:** [known gap]
+
+## Test Plans
+
+- [`../test-plans/<name>.md`](../test-plans/<name>.md): [Behaviors verified]
 
 ## Revision history
 
-| Version | Date | Change | Motivation and impact |
+| Version | Date | Change and reason |
 | --- | --- | --- | --- |
-| [version] | YYYY-MM-DD | [Summary] | [Finding/decision and impact assessment] |
+| [version] | YYYY-MM-DD | [Summary and why it changed] |
 
 ## Acceptance boundary
 
-[What acceptance establishes and does not authorize.]
+[What accepting this Specification establishes and what still requires explicit user authority.]

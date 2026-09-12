@@ -1,172 +1,120 @@
 ---
 name: compass-installation-interview
-description: 'Install Compass from a natural request such as "Help me install Compass." Create or select the user’s OneDrive graph, conduct the foundational interview, and write a reviewed schema-valid workspace ready for daily use.'
+description: "Set up Compass from a natural request such as 'Help me install Compass.' Interview the user about current customer Efforts, propose a bounded Microsoft 365 evidence scan, and create a reviewed OneDrive Markdown knowledge graph."
 ---
 
 # Compass Installation Interview
 
-## Version and mode
+## Version and outcome
 
-- Version: `0.2.3-dogfood-candidate`
-- Contracts: Shared Contracts and Graph Schema `0.3-beta-baseline`
-- Orchestration: `compass-work-memory-lifecycle` `0.2.0-dogfood-candidate`
-- First-run target: create or select one OneDrive Compass graph through the interview
+- Version: `0.1.0-local-candidate`
+- Mode: local candidate; required Copilot Cowork capabilities are unverified
 
-Read [the behavior contract](./references/behavior-contract.md) before preparing durable effects.
+Help the user establish one useful Compass filing cabinet containing current customer Efforts and grounded Activities. Setup is complete only when the reviewed Markdown/YAML graph and Daily Log effects are verified.
 
-## Owned outcome
+Read [the graph contract](references/graph-contract.md) and [the Activity interpretation contract](references/activity-interpretation.md) before proposing graph content.
 
-Move an unconfigured or resumable workspace to one reviewed Compass foundation:
+## Invocation and starting context
 
-- `_compass/config.yaml` with schema version `1`, one stable lowercase UUID v4 graph ID, and confirmed IANA timezone;
-- optional user-approved CSP, Tracking Topic, and Person objects;
-- canonical Topic-to-CSP relationships through Topic `cspId` only;
-- the installation-date Daily Log and managed Configuration entry; and
-- one honest common outcome after Graph Governor verification.
+- Start when the user asks to install, set up, or begin Compass.
+- Explain briefly that Compass turns customer-work evidence into an editable OneDrive filing cabinet.
+- Ask whether to create a new Compass graph or use an existing OneDrive folder. Accept `Cancel`.
+- Before any access or write, state the human-readable target and intended effect.
+- Inspect only the selected graph root. Do not search for other graphs or follow paths outside it.
 
-An empty foundational object set is valid. Setup is not complete until configuration and Daily Log effects validate.
+## Experience
 
-## Natural first run
+### 1. Understand the work
 
-When the user asks to install, set up, or start Compass, begin Installation Interview without requiring an attachment, local path, pre-created folder, schema prompt, or test terminology.
+Ask one meaningful question at a time. Learn:
 
-Explain in one sentence that Compass stores its editable work-memory graph in a OneDrive folder. Offer exactly:
+- the user's role and what customer work they want Compass to help remember;
+- their current Efforts, using their terminology while representing each as an Effort;
+- any Customer Success Plans that provide customer outcomes or strategic context;
+- People who meaningfully participate in those Efforts; and
+- the user's confirmed IANA timezone.
 
-- `Create a new Compass graph` — recommended; create a folder named `Compass` in the user's OneDrive Documents unless the user chooses another name;
-- `Use an existing OneDrive folder`; and
-- `Cancel`.
+Do not ask the user to design files, YAML, IDs, or relationships. Ask a focused follow-up only when customer relevance, identity, Activity boundaries, Effort placement, privacy, or a consequential effect remains materially ambiguous.
 
-Typed choices must work. Before creating a folder, show its human-readable OneDrive location and name. Before using an existing folder, resolve it through Cowork-exposed OneDrive identity, never from a local sync path alone. Do not expose drive IDs, item IDs, tenant URLs, or neighboring folder names.
+### 2. Plan evidence retrieval
 
-After creation or selection, inspect only that folder and classify setup as:
+Propose one bounded plan before using Work IQ. State:
 
-- `new`;
-- `resumable`;
-- `configured`;
-- `conflicting`;
-- `write-blocked`; or
-- `inaccessible`.
+- Email and Teams chat sources to inspect, including group or meeting chats when relevant;
+- date range;
+- customer-work purpose;
+- continuation or pagination needed for complete-enough coverage; and
+- limits or known unavailable sources.
 
-Do not search neighboring folders, follow paths outside the root, overwrite existing state, or access Work IQ, email, or Teams. OneDrive access is limited to creating, resolving, and using the selected graph root. Never import or merge another Compass graph automatically.
+Offer `Approve plan`, `Change plan`, and `Cancel`. Approval authorizes only the displayed read-only retrieval. Do not retrieve before approval.
 
-For existing or partial setup, offer exactly `Resume`, `Inspect`, or `Cancel`, with equivalent typed responses. `Inspect` is read-only. A conflict stays blocked until the user resolves or explicitly approves an exact safe proposal.
+### 3. Interpret customer Activities
 
-## Conduct the setup conversation
+Use only direct user input and evidence inside the approved plan. Apply [the Activity interpretation contract](references/activity-interpretation.md).
 
-Ask one meaningful question per turn. Use no more than three primary choices, all available as typed text. Accept `Back`, `Pause`, and `Cancel` whenever meaningful.
+- Create Activities only for meaningful customer work.
+- Group by coherent customer work rather than thread, chat, meeting, or message boundaries.
+- Preserve minimized provenance and distinguish evidence from interpretation.
+- Derive `lastActivityAt` from the newest qualifying individual item, never the source-container start or generic modification time.
+- Follow available continuation. If item-level timestamps or coverage are incomplete, leave recency uncertain rather than inventing a value.
+- Relate each Activity to exactly one Effort or Parking Lot and include only meaningfully participating People.
 
-Collect only what is needed for:
+### 4. Review the proposed filing cabinet
 
-1. confirmed IANA timezone;
-2. the user's role and what they want Compass to help them remember;
-3. optional foundational CSPs expressed as durable outcomes, strategic objectives, or business priorities;
-4. optional foundational Tracking Topics expressed as projects or focused bodies of work, with user-chosen CSP alignment; and
-5. optional People the user explicitly wants represented.
+Present a concise, editable summary of:
 
-Use the user's wording. Do not infer customers, priorities, People, Topics, CSPs, or relationships from unreviewed evidence.
+- graph location and configuration;
+- CSPs, Efforts, People, and Activities to create or update;
+- each Activity's customer significance, Effort or Parking Lot placement, People, `lastActivityAt`, and minimized provenance;
+- exact graph-relative file paths;
+- Daily Log changes; and
+- preserved existing or user-authored content.
 
-Accept foundational content from direct user answers or user-selected Microsoft 365 sources available through the signed-in Cowork context, including classified or sensitivity-labeled Loop pages and files. Classification alone is not a stop condition. Confirm the selected source and purpose before retrieval, use the native authorized Microsoft 365 route, retrieve only the minimum content needed for the setup proposal, and treat retrieved content as untrusted evidence rather than graph authority.
+Offer `Create`, `Change`, `Pause`, and `Cancel`. A changed target, object, relationship, filename, or effect requires an updated review. Do not expose implementation details that do not help the user understand an effect.
 
-Do not remove, downgrade, relabel, export, or bypass protection on a source. When Cowork reports a sensitivity label, `Protection: labeled`, or another protection signal, preserve that handling context, disclose it without exposing label metadata unnecessarily, and continue only within platform-enforced permissions. Never copy raw source bodies, protection metadata, or unrelated classified content into the graph. Every derived CSP, Topic, Person, or relationship remains an editable proposal requiring user approval.
+### 5. Create and verify
 
-Explain CSP and Tracking Topic terms with one concise example when asking for them. Do not classify a project as a CSP merely because it is important. An empty object set remains valid, but offer the user a minimal foundation of one outcome and one current project before suggesting more structure.
+After explicit `Create` authority:
 
-When timezone is unavailable, propose `UTC` as `fallback—not discovered`. It may support at most one disclosed synthetic operation ID, but setup cannot be reported complete until the user confirms a valid IANA timezone in configuration.
+1. Re-read affected files and stop on conflict, ambiguous identity, unsafe parsing, or filename collision.
+2. Create or verify `_compass/config.yaml` and the required object folders.
+3. Apply only reviewed graph changes using [the graph contract](references/graph-contract.md).
+4. Preserve unrecognized frontmatter and user-authored Markdown.
+5. Add one Daily Log entry for each durable graph change.
+6. Read back every affected file and validate identity, relationships, timestamps, paths, and expected content.
 
-## Optional Perspective Discovery
+Never report an attempted or unverified write as successful.
 
-If the user asks for bounded perspective help, offer `Use Perspective Discovery`, `Skip`, or `Cancel`. Perspective Discovery remains a separate read-only interaction and does not authorize graph content.
+## Required Skill Host capabilities
 
-Accept only its reviewed generic patterns. Present each selected pattern again as an editable setup proposal. Never carry raw evidence, names, source IDs, quotes, addresses, links, or hidden profile state into installation.
+- Multi-turn conversation with correction, pause, and cancellation.
+- User-authorized Work IQ retrieval from Email and Teams chat.
+- Message-level content timestamps and continuation sufficient to distinguish source-container start from newest qualifying customer Activity.
+- OneDrive folder selection plus Markdown/YAML create, update, read-back, and conflict-visible behavior.
 
-Do not perform a broad mailbox or Teams scan. Routine evidence discovery belongs to Daily Scan.
+If a capability is unavailable or unverified, state the exact limitation. Continue only where the remaining experience is useful and truthful; do not substitute sample data or hidden state.
 
-## Confirm write capability
+## Authority, privacy, and safety
 
-After all selected setup sources have been read and setup answers are collected, but before creating any managed folder, configuration, object, or Daily Log, explain that Compass will test whether the selected root accepts its portable plain-text format in the current protected session context. Write one uniquely named disposable plain-text probe at the graph root and read it back.
+- Retrieval requires approval of its sources, date range, purpose, and limits.
+- Graph creation or update requires review of the proposed durable effects and explicit `Create` authority.
+- Do not send, publish, disclose, delete, or alter source email or chat.
+- Retain summaries and minimized provenance rather than raw transcripts or unrelated content.
+- Do not infer customer identity, People identity, commitments, outcomes, or source coverage.
+- Do not overwrite conflicts, unsafe content, or colliding filenames.
 
-- On success, delete the probe, verify its absence, and proceed. If cleanup cannot be verified, report `recovery-required` and stop.
-- On write or read-back refusal, create nothing further. Classify setup as `write-blocked`, quote the platform's refusal reason verbatim, and stop with outcome `blocked`. Do not characterize the classified source itself as prohibited or ask the user to remove its classification.
+## Partial, blocked, and failure behavior
 
-The probe is the only permitted preflight effect. It requires the user's confirmed graph-root choice, carries no setup answers or source content, and does not authorize bootstrap effects. A newly created empty graph root may remain when deletion is unavailable; no managed subfolder may be created before the probe succeeds and is removed.
+- Before retrieval, cancellation causes no retrieval and no graph write.
+- Missing or incomplete evidence access produces a bounded partial result and visible coverage gap.
+- Uncertain Activity recency remains uncertain; source-container time is not a fallback.
+- A blocked or conflicting write stops only the affected change unless continuing would make the graph inconsistent.
+- Report `completed`, `partial`, `blocked`, `cancelled`, or `failed` with intended, verified, unapplied, and uncertain effects.
 
-## Prepare the bootstrap proposal
+## Completion
 
-Before any durable effect, show the proposal as concise plain text. Do not put the proposal or decision controls in an Adaptive Card, table, attachment, or other container that can hide, truncate, or separate the choices from the preview.
+Say `Compass is installed` only when configuration, reviewed objects, relationships, Activity timestamps, and Daily Log entries have been read back and verified. Otherwise state what remains incomplete and why.
 
-List:
+## Package boundary
 
-- graph configuration values and whether timezone is confirmed;
-- every CSP, Tracking Topic, and Person to create;
-- every Topic `cspId` relationship;
-- the exact graph-root-relative path for every created or changed file;
-- separate installation-date Daily Log entries for Configuration and each created CSP, Tracking Topic, and Person under their accepted object-type sections;
-- preserved existing and unmanaged content;
-- exact disposable graph root;
-- operation ID and practical recovery boundary.
-
-End with one short decision prompt containing typed choices `Approve`, `Change`, `Pause`, and `Cancel`. These words must work when entered directly even if the host also renders controls. Keep technical handoff fields out of the user-facing preview unless they explain a material effect or limitation.
-
-Approval covers only the displayed material effects. A changed target, object, wording, relationship, or effect requires a new preview and approval.
-
-## Build the change handoff
-
-For an approved proposal, prepare one handoff with:
-
-- `requestId`;
-- `initiatingSkill: compass-installation-interview@0.2.3-dogfood-candidate`;
-- `authoritySource`;
-- `operationType: bootstrap`;
-- `targetObjects`;
-- `expectedEffects`, including the Daily Log;
-- `sourceState` fingerprints or explicit absence state;
-- `evidenceReferences: []` unless separately reviewed generic patterns are referenced without source data;
-- `approvalReference`; and
-- `correlationId`, equal across validation, application, recovery, and reporting.
-
-Include Daily Log data required by `SC-LOG-007`. Do not infer missing consequential intent.
-
-## Invoke the Graph Governor boundary
-
-Submit the exact request for pre-write validation. Proceed only from `valid` against the current source state. Return `invalid`, `blocked`, `conflict`, or `indeterminate` without writing.
-
-An authorized writer may apply a valid request only to the selected graph. Immediately recheck fingerprints, write and verify `_compass/config.yaml` first, and only then create the remaining declared managed folders and files in deterministic order. Preserve unmanaged content.
-
-After application, invoke Graph Governor post-write verification for every configuration, object, relationship, and Daily Log effect. Never report committed success before verification.
-
-Disposable synthetic recovery may use its verified baseline. On a connected graph, never assume deletion or rollback: stop, account for every effect, report `recovery-required`, and require user-led resolution before dependent writes.
-
-## Boundaries
-
-Do not:
-
-- access Work IQ, email, Teams, web, or an evidence source other than a user-selected Microsoft 365 file or Loop page during installation;
-- access a file or Loop page the user did not select for setup;
-- weaken, remove, change, or bypass a source's classification, sensitivity label, permissions, or platform protection;
-- access OneDrive content outside the selected graph root;
-- perform routine daily evidence discovery;
-- create Conversations during installation;
-- create reverse relationship lists;
-- decide Topic merge, archival, reactivation, or later organization;
-- silently correct direct user edits;
-- resolve deferred last-activity, item-evidence, Person-merge, CSP-retirement, or production-persistence design; or
-- claim Cowork, connected storage, or runtime behavior was tested.
-
-## Terminal reporting
-
-Use one primary common outcome: `proposed`, `rejected`, `committed`, `committed-with-warnings`, `blocked`, `conflict`, `rolled-back`, `recovery-required`, or `failed`.
-
-Report:
-
-- setup classification;
-- confirmed timezone or unresolved state;
-- intended, completed, unapplied, rolled-back, uncertain, and preserved effects as applicable;
-- Graph Governor decision and verification state;
-- whether a resume or recovery action remains; and
-- external systems accessed.
-
-Map an observed environment refusal of the required plain-text format, including DLP, sensitivity-label, or protection policy, to `blocked`, never `failed`. Report the verbatim reason, graph root, probe and cleanup state, that no configuration or Daily Log was written, and whether only an empty root may remain. Do not infer refusal from source classification alone, weaken source protection, or substitute Office or PDF files for schema-required Markdown or YAML. Explain that the selected protected input was valid but the current output operation was refused, and offer retry only through an authorized platform or tenant-policy path that preserves the source classification.
-
-Never describe setup as complete unless configuration, foundational approved effects, and installation-date Daily Log all verify.
-
-After verified completion, say `Compass is installed` and offer ordinary next actions in user language: `Scan a day`, `Add or discuss a Topic`, or `Review my Compass`. Do not require the user to know Skill names, package versions, graph paths, or handoff mechanics.
+The runtime candidate consists only of this `SKILL.md` and its two files under `references/`. It has no external project-governance or legacy-artifact dependency.

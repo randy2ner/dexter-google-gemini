@@ -19,9 +19,9 @@
 
 ## Dependencies
 
-| Dependency | Type | Version/constraint | Required | Failure impact |
+| Dependency | Type | Compatibility condition | Required | Failure impact |
 | --- | --- | --- | --- | --- |
-| [Name or relative link] | [Skill/tool/data/human] | [Version] | [Yes/No] | [Impact] |
+| [Name or relative link] | [Skill/tool/data/human] | [Condition] | [Yes/No] | [Impact] |
 
 ## Flow
 
@@ -44,10 +44,10 @@
 
 - [Failure mode]: [expected response and recovery path]
 
-## Validation scenarios
+## Test Plans
 
-- [Relative link to a scenario]
+- [Relative link to each Test Plan and the coordinated behavior it confirms]
 
-## Change impact
+## Revision guidance
 
-[Identify which scenarios and downstream dependencies must be revisited when this Orchestration changes.]
+[Identify affected Specifications, Skills, packages, and Test Plans when this coordination changes.]

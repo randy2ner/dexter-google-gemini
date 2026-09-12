@@ -1,70 +1,59 @@
-# Product Requirements Document: [product or capability]
+# [Project] Product Requirements Document
 
 ## Document control
 
-- **Status:** [draft, proposed, accepted, living, superseded]
-- **Version:** [version]
-- **Owner:** [role or person]
+- **Status:** [draft or active]
+- **Owner:** [user or product owner]
 - **Created:** YYYY-MM-DD
 - **Last updated:** YYYY-MM-DD
-- **Governed by:** [Charter link]
-- **Supersedes:** [link or None]
+- **Governed by:** `CHARTER.md` (replace with a relative link in the project copy)
 
-## Product purpose
+## Product purpose and user problems
 
-[Concise value statement subordinate to the Charter.]
+[Summarize the Charter purpose and the problems this product should address. Do not promote provisional Charter ideas without user acceptance.]
 
-## User problem
+## Prioritized outcomes
 
-[What users experience today and why it matters.]
+| ID | Outcome | Priority | Charter state |
+| --- | --- | --- | --- |
+| OUT-001 | [Observable user outcome] | [must, should, or could] | [accepted or provisional] |
 
-## Intended users and contexts
+## Product requirements and acceptance signals
 
-[Users, contexts, and explicitly unsupported personas.]
-
-## Required outcomes
-
-| ID | Outcome | Priority | Source | Status |
+| ID | Requirement | Priority | Acceptance signal | State |
 | --- | --- | --- | --- | --- |
-| OUT-001 | [Outcome] | [must/should/could] | [Charter or decision] | [accepted/provisional] |
+| PR-001 | [Required capability or quality] | [must, should, or could] | [What would indicate success] | [accepted or provisional] |
 
-## Product requirements
+## Required capabilities
 
-| ID | Requirement | Priority | Acceptance signal | Source | Status |
-| --- | --- | --- | --- | --- | --- |
-| PR-001 | [User-visible requirement] | [must/should/could] | [Observable evidence] | [Link] | [accepted/provisional] |
+| Capability | Why it is needed | Skill host dependency | State |
+| --- | --- | --- | --- |
+| [Capability] | [Outcome supported] | [Required host behavior] | [available, needs verification, unavailable, or unknown] |
 
-Include functional, safety, privacy, authority, portability, and human-interaction requirements when applicable.
+## Non-goals
 
-## MVP relationship
-
-- **Current MVP scope:** [link or pending]
-- **Assumptions to test:** [list]
-
-## Non-goals and exclusions
-
-- [Exclusion]
+- [Outcome or behavior the project does not pursue]
 
 ## Constraints and dependencies
 
-- [Constraint or dependency]
+- [Constraint, dependency, or compatibility condition]
 
-## Success measures and guardrails
+## Specification index
 
-- [Measure or qualitative signal; do not invent metrics]
+| Specification | Requirements covered | State |
+| --- | --- | --- |
+| [`specifications/<name>.md`](specifications/<name>.md) | [IDs] | [proposed, accepted, or implemented] |
 
 ## Open questions
 
-- [Question, owner, and decision needed]
-
-## Traceability
-
-- **Specifications:** [links]
-- **Test plans:** [links]
-- **Register:** [link]
+- [Uncertainty and its effect]
 
 ## Revision history
 
-| Version | Date | Change | Motivation |
-| --- | --- | --- | --- |
-| [version] | YYYY-MM-DD | [Summary] | [Finding, decision, or user direction] |
+| Date | Change and reason |
+| --- | --- |
+| YYYY-MM-DD | [What changed and why] |
+
+## Authority boundary
+
+This PRD defines desired outcomes and requirements under the Charter. It does not independently accept provisional Charter direction or authorize implementation or external effects.
